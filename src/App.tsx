@@ -1,9 +1,9 @@
 const App = () => {
 
     return (
-        <div>
-            <h1>React Typescript Template</h1>
-        </div>
+        <h1 className="bg-red-500 text-red-100">
+            Hello world!
+        </h1>
     );
 };
 
