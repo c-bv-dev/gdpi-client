@@ -8,7 +8,10 @@ const RequireAuth = ({ allowedRoles }: any) => {
         user.role && allowedRoles.includes(user.role) ?
             <Outlet />
             :
-            <Navigate to='/' />
+            user.role ?
+                <Navigate to='/not-found' />
+                :
+                <Navigate to='/' />
     );
 };
 
