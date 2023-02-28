@@ -1,51 +1,47 @@
-import { useRef, useState } from 'react';
-import fectcher from '../fetch';
-import fetcher from '../fetch';
-import useFetch from '../hooks/useFetch';
-const Login = () => {
+import { Button, Input } from '@components/ui';
+import useFetch from '@hooks/useFetch';
+import useToast from '@hooks/useToast';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+const Login = () => {
+    const navigate = useNavigate();
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
-    const email = emailRef.current?.value;
-    const password = passwordRef.current?.value;
+    const { notify } = useToast();
 
-    const {
-        state,
-        setState
-    } = useFetch({ url: 'https://dev-api.thezerofund.eu/projects' });
+    const [errors, setErrors] = useState({
+        email: '',
+        password: '',
+    });
 
-    const [projects1, setProjects] = useState([]);
+    const { data, loading, error, fetcher } = useFetch();
 
-    const refetch = () => {
-        setState({ ...state, status: 'refetching' });
+    const handleSubmit = () => {
+        const email = emailRef.current?.value;
+        const password = passwordRef.current?.value;
+
+        if (!email) return setErrors({ ...errors, email: 'Email is required' });
+        if (!password) return setErrors({ ...errors, password: 'Password is required' });
+
+        fetcher({ url: 'https://jsonplaceholder.typicode.com/posts/1' });
+        setErrors({ email: '', password: '' });
     };
 
-    // const toto = fetchData({ url: 'https://fetch-progress.anthum.com/30kbps/images/sunrise-baseline.jpg' });
-    // const toto = fetchData({ url: 'https://dev-api.thezerofund.eu/projects' });
-    // console.log('🚩', toto);
+    useEffect(() => {
+        error && notify({ message: error.message, type: 'error' });
+    }, [error]);
 
-    // const click = async () => {
-    //     const projects =  http();
-    //     console.log('🚩', projects.loading);
-    //     await projects.json('https://api.thezerofund.eu/projects', null);
-    // };  
-    console.log('🚩', fetcher.json('https://api.thezerofund.eu/projects', null));
-    console.log('🚩', fetcher.loading);
-    
+    useEffect(() => {
+        data && notify({ message: 'Login successful', type: 'success' });
+    }, [data]);
 
     return (
-        <div>
-            <h2>{fectcher.loading ? 'Loading...' : 'Loaded'}</h2>
-            {/* <button onClick={click}>Click</button> */}
-            <h1>Login</h1>
-            <p>{state.data ? state.data.value : 'Loading...'}</p>
-            <p>{state.status}</p>
-            <p>{state.progress}</p>
-            <input type='email' placeholder='Email' ref={emailRef} />
-            <input type='password' placeholder='Password' ref={passwordRef} />
-            {/* refectch button */}
-            < button onClick={refetch}>Refetch</button>
+        <div className='flex flex-col items-center gap-2 justify-center h-screen'>
+            <Input type='email' name='email' label='Email' reference={emailRef} error={errors.email} />
+            <Input type='password' name='password' label='Password' reference={passwordRef} error={errors.password} />
+            <Button onClick={handleSubmit}>Login</Button>
         </div>
     );
 };

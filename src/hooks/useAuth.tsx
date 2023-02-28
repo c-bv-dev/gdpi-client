@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IUser } from '../utils/types';
+import { IUser } from '../types/types';
 
 const useAuth = () => {
     const [user, setUser] = useState({

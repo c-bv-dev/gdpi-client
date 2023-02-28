@@ -5,7 +5,27 @@ module.exports = {
         './src/**/*.{js,ts,jsx,tsx}',
     ],
     theme: {
-        extend: {},
+        extend: {
+            animation: {
+                'shimmer': 'shimmer 1s ease-in-out infinite',
+            },
+            keyframes: {
+                shimmer: {
+                    '0%': {
+                        width: '75%',
+                    },
+                    '50%': {
+                        width: '50%',
+                    },
+                    '100%': {
+                        width: '100%',
+                        transform: 'translateX(100%)',
+                    },
+                },
+            },
+        },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/forms'),
+    ],
 }

@@ -1,80 +1,75 @@
-import { useEffect, useRef, useState } from 'react';
+import useLoader from '@hooks/useLoader';
+import { useEffect, useReducer, useRef } from 'react';
 
-interface IProps {
-    url: string,
-    options?: RequestInit
-}
+interface State {
+    data?: any;
+    loading: boolean;
+    error?: Error
+};
 
-interface IState {
-    state: {
-        status: string,
-        data: any,
-        error: any
-    }
-}
+interface IFetcherProps {
+    url: string;
+    options?: RequestInit;
+};
 
-const useFetch = ({ url, options }: IProps) => {
-    const cache = useRef({} as any);
-    const [state, setState] = useState({
-        status: 'idle',
-        data: null,
-        error: null
-    } as any);
+interface IUseFetch {
+    data?: any;
+    loading: boolean;
+    error?: Error;
+    fetcher: (props: IFetcherProps) => Promise<void>;
+};
 
-    useEffect(() => {
+type Cache = { [url: string]: any };
+
+const useFetch = (): IUseFetch => {
+    const { openLoader, closeLoader } = useLoader();
+    const cache = useRef({} as Cache);
+
+    const initialState: State = {
+        data: undefined,
+        loading: false,
+        error: undefined
+    };
+
+    const fetchReducer = (state: State, action: any) => {
+        switch (action.type) {
+            case 'loading':
+                return { ...initialState, loading: true };
+            case 'success':
+                return { ...initialState, data: action.payload, loading: false };
+            case 'error':
+                return { ...initialState, error: action.payload, loading: false };
+            default:
+                return state;
+        }
+    };
+
+    const [state, dispatch] = useReducer(fetchReducer, initialState);
+
+    const fetcher = async ({ url, options }: IFetcherProps): Promise<void> => {
         if (!url) return;
-        const fetchData = async () => {
-            setState({ ...state, status: 'fetching' });
 
-            if (cache.current[url]) {
-                setState({ status: 'fetched', data: cache.current[url], error: null });
-            } else {
-                try {
-                    const response = await fetch(url, options);
+        dispatch({ type: 'loading' });
 
-                    const tt = response.body as any;
-                    const reader = tt.getReader();
+        if (cache.current[url]) return dispatch({ type: 'success', payload: cache.current[url] });
 
-                    const contentLength = response.headers.get('content-length');
-                    const total = parseInt(contentLength || '0', 10);
-                    // console.log('🚩', total);
-                    let loaded = 0;
-                    let data = [] as any; 
-                    while (true) {
-                        const { done, value } = await reader.read();
-                        if (done) break;
-                        loaded += value.length;
-                        data.push(value);
-                        setState({ ...state, progress: Math.round(loaded / total * 100) });
-                    }
-                    let dataArr = new Uint8Array(loaded);
-                    // console.log('🚩', dataArr);
-                    const json = JSON.parse(new TextDecoder('utf-8').decode(new Uint8Array(loaded)));
-                    cache.current[url] = json;
-                    // console.log('🚩', json);
-                    // let dataArr = new Uint8Array(loaded);
-                    // let position = 0;
-                    // for (let chunk of data) {
-                    //     dataArr.set(chunk, position);
-                    //     position += chunk.length;
-                    // }
-                    // const json = JSON.parse(new TextDecoder('utf-8').decode(dataArr));
-                    // console.log('🚩', json);
-                    setState({ status: 'fetched', data: json, error: null });
-                } catch (error) {
-                    setState({ status: 'error', data: null, error });
-                }
-            }
-        };
-        fetchData();
-        // eslint-disable-next-line
-    }, [url]);
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error(response.statusText);
+
+            const data = await response.json();
+            cache.current[url] = data;
+            dispatch({ type: 'success', payload: data });
+        } catch (err) {
+            dispatch({ type: 'error', payload: err as Error });
+        }
+    };
 
     useEffect(() => {
-        // console.log(state.status);
-    }, [state.status]);
+        state.loading ? openLoader() : closeLoader();
+    }, [state.loading]);
 
-    return { state, setState };
+    return { ...state, fetcher };
 };
 
 export default useFetch;
