@@ -6,18 +6,18 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
-    const emailRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
 
     const { notify } = useToast();
+    const { data, loading, error, fetcher } = useFetch();
+    
+    const emailRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
 
     const [errors, setErrors] = useState({
         email: '',
         password: '',
     });
-
-    const { data, loading, error, fetcher } = useFetch();
-
+    
     const handleSubmit = () => {
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;

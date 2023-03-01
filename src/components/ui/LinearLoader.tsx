@@ -2,7 +2,7 @@ import { createPortal } from 'react-dom';
 
 const LinearLoader = () => {
     return createPortal(
-        <div className=' fixed top-0 w-full h-1 overflow-hidden bg-gray-600
+        <div className='fixed top-0 w-full h-1 overflow-hidden bg-gray-600
         after:absolute 
         after:w-full 
         after:top-0 
