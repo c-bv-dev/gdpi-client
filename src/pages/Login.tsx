@@ -9,7 +9,7 @@ const Login = () => {
 
     const { notify } = useToast();
     const { data, loading, error, fetcher } = useFetch();
-    
+
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -17,7 +17,7 @@ const Login = () => {
         email: '',
         password: '',
     });
-    
+
     const handleSubmit = () => {
         const email = emailRef.current?.value;
         const password = passwordRef.current?.value;
@@ -25,7 +25,14 @@ const Login = () => {
         if (!email) return setErrors({ ...errors, email: 'Email is required' });
         if (!password) return setErrors({ ...errors, password: 'Password is required' });
 
-        fetcher({ url: 'https://jsonplaceholder.typicode.com/posts/1' });
+        fetcher({
+            url: `${process.env.VITE_API_URL}/auth/login`,
+            options: {
+                method: 'POST',
+                body: JSON.stringify({ email, password }),
+                headers: { 'Content-Type': 'application/json' }
+            }
+        });
         setErrors({ email: '', password: '' });
     };
 
@@ -34,6 +41,7 @@ const Login = () => {
     }, [error]);
 
     useEffect(() => {
+        console.log('🚩', data);
         data && notify({ message: 'Login successful', type: 'success' });
     }, [data]);
 
