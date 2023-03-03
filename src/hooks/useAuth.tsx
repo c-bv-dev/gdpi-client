@@ -1,16 +1,10 @@
-import { useState } from 'react';
-import { IUser } from '../types/types';
+import AuthContext from '@contexts/AuthContext';
+import { useContext } from 'react';
 
 const useAuth = () => {
-    const [user, setUser] = useState({
-        id: '',
-        email: '',
-        role: '',
-    } as IUser);
-
-    return {
-        user, setUser,
-    };
+    const context = useContext(AuthContext);
+    if (!context) throw new Error('Context must be use inside provider');
+    return context;
 };
 
 export default useAuth;

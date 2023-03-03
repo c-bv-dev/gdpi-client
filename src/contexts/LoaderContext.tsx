@@ -9,8 +9,6 @@ export const LoaderProvider = ({ children }: any) => {
     const openLoader = () => setOpen(true);
     const closeLoader = () => setOpen(false);
 
-    
-
     return (
         <LoaderContext.Provider
             value={{
@@ -21,7 +19,6 @@ export const LoaderProvider = ({ children }: any) => {
             {open && <LinearLoader />}
         </LoaderContext.Provider>
     );
-
 };
 
 export default LoaderContext;

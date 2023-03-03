@@ -1,14 +1,9 @@
 import { Button, Input } from '@components/ui';
-import useFetch from '@hooks/useFetch';
-import useToast from '@hooks/useToast';
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import useAuth from '@hooks/useAuth';
+import { useRef, useState } from 'react';
 
 const Login = () => {
-    const navigate = useNavigate();
-
-    const { notify } = useToast();
-    const { data, loading, error, fetcher } = useFetch();
+    const { login } = useAuth();
 
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
@@ -25,25 +20,8 @@ const Login = () => {
         if (!email) return setErrors({ ...errors, email: 'Email is required' });
         if (!password) return setErrors({ ...errors, password: 'Password is required' });
 
-        fetcher({
-            url: `${process.env.VITE_API_URL}/auth/login`,
-            options: {
-                method: 'POST',
-                body: JSON.stringify({ email, password }),
-                headers: { 'Content-Type': 'application/json' }
-            }
-        });
-        setErrors({ email: '', password: '' });
+        login(email, password);
     };
-
-    useEffect(() => {
-        error && notify({ message: error.message, type: 'error' });
-    }, [error]);
-
-    useEffect(() => {
-        console.log('🚩', data);
-        data && notify({ message: 'Login successful', type: 'success' });
-    }, [data]);
 
     return (
         <div className='flex flex-col items-center gap-2 justify-center h-screen'>

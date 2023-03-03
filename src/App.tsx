@@ -1,15 +1,15 @@
 import Toaster from '@components/ui/Toaster';
+import { AuthProvider } from '@contexts/AuthContext';
 import Login from '@pages/Login';
+import RequireAuth from '@utils/RequireAuth';
 import { Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.min.css';
-import RequireAuth from './features/auth/RequireAuth';
 
 const App = () => {
-
     return (
         <>
             <Routes>
-                <Route path='/' >
+                <Route path='/'>
                     <Route index element={<Login />} />
                     <Route path='dashboard' element={<RequireAuth />}>
                         <Route index element={<h1>Dashboard</h1>} />
