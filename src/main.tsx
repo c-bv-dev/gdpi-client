@@ -1,5 +1,6 @@
 import { AuthProvider } from '@contexts/AuthContext';
 import { LoaderProvider } from '@contexts/LoaderContext';
+import { UserProvider } from '@contexts/UserContext';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
@@ -9,7 +10,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <BrowserRouter>
         <LoaderProvider>
             <AuthProvider>
-                <App />
+                <UserProvider>
+                    <App />
+                </UserProvider>
             </AuthProvider>
         </LoaderProvider>
     </BrowserRouter>
