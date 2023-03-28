@@ -34,7 +34,7 @@ const Login = () => {
                 email: '',
                 password: '',
             });
-            navigate('/u');
+            navigate('/dashboard');
         }
     };
 

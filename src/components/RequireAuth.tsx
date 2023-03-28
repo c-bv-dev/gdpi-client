@@ -1,32 +1,40 @@
 import useUser from '@hooks/useUser';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-const RequireAuth = () => {
-    const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+interface IProps {
+    roles?: string[];
+};
 
-    const { getUser } = useUser();
+const RequireAuth = (props: IProps) => {
+    const navigate = useNavigate();
+
+    const { user, setUser, getUser } = useUser();
 
     const checkUser = async () => {
-        const userToken = localStorage.getItem('user-token');
-        const userId = localStorage.getItem('user-id');
+        const userInLocalStorage = localStorage.getItem('user');
 
-        if (!userToken || !userId) {
-            localStorage.removeItem('user-token');
-            localStorage.removeItem('user-id');
-            setIsLoggedIn(false);
+        if (!userInLocalStorage) {
+            setUser(null);
             return navigate('/');
         }
-        await getUser();
-        setIsLoggedIn(true);
+
+        if (!user) {
+            const data = await getUser(JSON.parse(userInLocalStorage).id);
+            setUser(data);
+        }
+
+        if (user && (props.roles && !props.roles.includes(user.role))) {
+            console.log('You do not have permission to view this page.');
+            return navigate('/');
+        }
     };
 
     useEffect(() => {
         checkUser();
-    }, []);
+    }, [user]);
 
-    return isLoggedIn ? <Outlet /> : null;
+    return user ? <Outlet /> : null;
 };
 
 export default RequireAuth;
