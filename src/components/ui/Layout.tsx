@@ -1,12 +1,14 @@
+import Navbar from '@components/Navbar';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
 
     return (
-        <div>
-            <div style={{ height: '100vh', margin: '1rem', borderColor: 'red', borderStyle: 'solid', borderWidth: '1px' }}>
+        <div className='h-screen w-screen flex flex-row overflow-hidden '>
+            <Navbar />
+            <main className='flex-1 h-full overflow-y-auto border-2 border-red-500'>
                 <Outlet />
-            </div>
+            </main>
         </div>
     );
 };
