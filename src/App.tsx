@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 const App = () => {
     return (
-        <>
+        <div className='h-screen w-screen'>
             <Routes>
                 <Route path='/'>
                     <Route index element={<Login />} />
@@ -21,7 +21,7 @@ const App = () => {
                 </Route>
             </Routes>
             <Toaster />
-        </>
+        </div>
     );
 };
 
