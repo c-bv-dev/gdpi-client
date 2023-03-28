@@ -1,4 +1,5 @@
 import RequireAuth from '@components/RequireAuth';
+import Layout from '@components/ui/Layout';
 import Toaster from '@components/ui/Toaster';
 import Dashboard from '@pages/Dashboard';
 import Login from '@pages/Login';
@@ -12,11 +13,12 @@ const App = () => {
             <Routes>
                 <Route path='/'>
                     <Route index element={<Login />} />
-                    <Route path='dashboard' element={<RequireAuth roles={['user', 'admin']}/>}>
-                        <Route index element={<Dashboard />} />
-                        
-                        <Route path='settings' element={<Settings />} />
-                        
+                    <Route element={<RequireAuth roles={['user', 'admin']} />}>
+                        <Route element={<Layout />}>
+                            <Route path='dashboard' element={<Dashboard />} />
+                            <Route path='users' element={<p>Users</p>} />
+                            <Route path='settings' element={<Settings />} />
+                        </Route>
                     </Route>
                 </Route>
             </Routes>
