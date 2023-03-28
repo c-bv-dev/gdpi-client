@@ -14,7 +14,7 @@ const DashboardContainer = () => {
         },
         {
             title: 'Clients',
-            description: '2 commentaires de client'
+            description: '2 commentaires de clients'
         },
         {
             title: 'Matériels',
