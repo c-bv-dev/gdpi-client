@@ -9,6 +9,5 @@
 }
 
 body {
-    background-color: #727272;
-    color: #ffffff;
+    @apply h-full bg-blue-500 bg-grid-pattern;
 }

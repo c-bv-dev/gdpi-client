@@ -5,7 +5,7 @@ interface IProps {
 const Dashboard = (props: IProps) => {
 
     return (
-        <div className="h-full min-h-screen overflow-auto bg-zinc-900 p-5">
+        <div className="h-full min-h-screen overflow-auto ">
             <div>
                 <h6 className="my-4 font-Inter text-xs font-medium uppercase tracking-[1px] text-white">
                     STATISTIQUES

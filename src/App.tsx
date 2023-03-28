@@ -12,10 +12,11 @@ const App = () => {
             <Routes>
                 <Route path='/'>
                     <Route index element={<Login />} />
-                    <Route path='dashboard' element={<RequireAuth roles={['user']}/>}>
+                    <Route path='dashboard' element={<RequireAuth roles={['user', 'admin']}/>}>
                         <Route index element={<Dashboard />} />
+                        
                         <Route path='settings' element={<Settings />} />
-
+                        
                     </Route>
                 </Route>
             </Routes>

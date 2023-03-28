@@ -43,7 +43,7 @@ const Login = () => {
             <Input type='email' name='email' label='Email' reference={emailRef} error={errors.email} />
             <Input type='password' name='password' label='Password' reference={passwordRef} error={errors.password} />
             <Button onClick={handleSubmit}>Login</Button>
-        </div>
+        </div >
     );
 };
 
