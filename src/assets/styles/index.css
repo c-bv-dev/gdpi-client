@@ -9,5 +9,5 @@
 }
 
 body {
-    @apply h-full bg-blue-500 bg-grid-pattern;
+    @apply h-full bg-blue-500 bg-grid-pattern overflow-x-hidden text-white;
 }
