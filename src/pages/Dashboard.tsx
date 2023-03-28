@@ -1,7 +1,13 @@
+import DashboardContainer from "@components/DashboardContainer";
+import Navbar from "@components/Navbar";
+
 const Dashboard = () => {
 
     return (
-        <p>Dashboard</p>
+        <div className="flex h-full">
+            <Navbar/>
+            <DashboardContainer/>
+        </div>
     );
 };
 

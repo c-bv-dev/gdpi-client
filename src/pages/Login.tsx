@@ -24,7 +24,7 @@ const Login = () => {
     };
 
     return (
-        <div className='flex flex-col items-center gap-2 justify-center h-screen'>
+        <div className='flex flex-col items-center gap-2 justify-center h-full'>
             <Input type='email' name='email' label='Email' reference={emailRef} error={errors.email} />
             <Input type='password' name='password' label='Password' reference={passwordRef} error={errors.password} />
             <Button onClick={handleSubmit}>Login</Button>
