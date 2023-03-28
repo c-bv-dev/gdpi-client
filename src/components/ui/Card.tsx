@@ -1,7 +1,7 @@
 interface IProps {
     title: string,
     description: string
-}
+};
 
 const Card = ({ title, description }: IProps) => {
     return (
@@ -9,7 +9,7 @@ const Card = ({ title, description }: IProps) => {
             <h1>{title}</h1>
             <p>{description}</p>
         </div>
-    )
-}
+    );
+};
 
-export default Card
+export default Card;
