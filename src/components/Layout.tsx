@@ -10,7 +10,7 @@ const Layout = () => {
     const handleLocation = () => {
         return location.pathname.split('/')[1];
     };
-    console.log('🚩', loading);
+
     return (
         <div className='h-screen w-screen flex flex-row overflow-hidden'>
             <Navbar />
