@@ -4,19 +4,20 @@ import { createContext, useState } from 'react';
 const LoaderContext = createContext({} as any);
 
 export const LoaderProvider = ({ children }: any) => {
-    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const openLoader = () => setOpen(true);
-    const closeLoader = () => setOpen(false);
+    const openLoader = () => setLoading(true);
+    const closeLoader = () => setLoading(false);
 
     return (
         <LoaderContext.Provider
             value={{
+                loading, setLoading,
                 openLoader, closeLoader
             }}
         >
             {children}
-            {open && <LinearLoader />}
+            {loading && <LinearLoader />}
         </LoaderContext.Provider>
     );
 };

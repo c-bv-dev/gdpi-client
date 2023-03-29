@@ -1,16 +1,17 @@
 import useLoader from '@hooks/useLoader';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import useToast from './useToast';
 
 type Cache = { [url: string]: any };
 
 const useFetch = () => {
-    const { openLoader, closeLoader } = useLoader();
+    const {
+        loading, setLoading,
+        openLoader, closeLoader
+    } = useLoader();
+
     const { notify } = useToast();
     const cache = useRef({} as Cache);
-
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<Error>();
 
     useEffect(() => {
         loading ? openLoader() : closeLoader();
