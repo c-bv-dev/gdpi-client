@@ -1,4 +1,4 @@
-import LinearLoader from '@components/ui/LinearLoader';
+import LinearLoader from '@components/LinearLoader';
 import { createContext, useState } from 'react';
 
 const LoaderContext = createContext({} as any);

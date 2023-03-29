@@ -1,7 +1,10 @@
-import Input from "@components/ui/Input";
-import Card from "@components/ui/Card";
+import { Card } from '@components/ui';
+import useUser from '@hooks/useUser';
+import { FiUser } from 'react-icons/fi';
 
 const Dashboard = () => {
+
+    const { user } = useUser();
 
     const infos = [
         {
@@ -23,31 +26,27 @@ const Dashboard = () => {
     ];
 
     return (
-        <section className='bg-gray-700 w-full h-full'>
+        <section className='flex flex-col gap-4'>
             <div className='flex justify-between p-1 w-full h-48'>
                 <div className='flex gap-4 px-3 bottom-3 items-center '>
-                    <img src='https://images.assetsdelivery.com/compings_v2/nexusplexus/nexusplexus2101/nexusplexus210100387.jpg' alt='' className='w-24 h-24 rounded-full' />
+                    <div className='bg-gray-900 rounded-full p-3'>
+                        <FiUser className='text-4xl text-white' />
+                    </div>
                     <div className='flex flex-col gap-0.5'>
-                        <p>Francis STER</p>
-                        <p className='text-xs'>Technicien Réseaux</p>
+                        <p className='text-2xl'>{user?.firstName} {user?.lastName}</p>
+                        <p className='text-xs'>{user.role === 'user' ? 'Technician' : 'El administrador'}</p>
                     </div>
                 </div>
-                <div>
-                    {<Input type='search' name='dashSearch' placeholder='Search' />}
-                </div>
             </div>
-            <div className='w-full bg-gray-900 h-8'></div>
-            <div className='p-2 flex flex-col gap-4'>
-                <h1> En cours ...</h1>
+            <div className='p-2 flex flex-col gap-4 w-full'>
                 <div className='flex gap-6 whitespace-pre-wrap'>
-                    {
-                        infos.map((info) => (
-                            <Card
-                                key={info.title}
-                                title={info.title}
-                                description={info.description} />
-                        ))
-                    }
+                    {infos.map((info) => (
+                        <Card
+                            key={info.title}
+                            title={info.title}
+                            description={info.description}
+                        />
+                    ))}
                 </div>
             </div>
         </section>
