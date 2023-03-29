@@ -27,8 +27,13 @@ const useFetch = () => {
         }
 
         const response = await fetch(url, options);
-        const data = await response.json();
 
+        if (!response.headers.get('Content-Type')?.includes('application/json')) {
+            setLoading(false);
+            return response;
+        }
+
+        const data = await response.json();
         if (!response.ok) {
             notify({ message: data.message, type: 'error' });
             setLoading(false);

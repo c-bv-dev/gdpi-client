@@ -1,9 +1,10 @@
-import RequireAuth from '@components/RequireAuth';
 import Layout from '@components/Layout';
+import RequireAuth from '@components/RequireAuth';
 import Toaster from '@components/Toaster';
 import Dashboard from '@pages/Dashboard';
 import Login from '@pages/Login';
 import Settings from '@pages/Settings';
+import Users from '@pages/Users';
 import { Route, Routes } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -16,7 +17,7 @@ const App = () => {
                     <Route element={<RequireAuth roles={['user', 'admin']} />}>
                         <Route element={<Layout />}>
                             <Route path='dashboard' element={<Dashboard />} />
-                            <Route path='users' element={<p>Users</p>} />
+                            <Route path='users' element={<Users />} />
                             <Route path='settings' element={<Settings />} />
                         </Route>
                     </Route>

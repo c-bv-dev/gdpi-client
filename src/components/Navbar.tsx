@@ -18,6 +18,11 @@ const Navbar = () => {
             label: 'Settings',
             icon: <FiSettings className='w-5 h-5' />,
             path: '/settings'
+        },
+        {
+            label: 'Users',
+            icon: <FiSettings className='w-5 h-5' />,
+            path: '/users'
         }
     ];
 
