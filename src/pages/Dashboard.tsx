@@ -23,7 +23,7 @@ const Dashboard = () => {
     ];
 
     return (
-        <section className='bg-gray-700 w-full '>
+        <section className='bg-gray-700 w-full h-full'>
             <div className='flex justify-between p-1 w-full h-48'>
                 <div className='flex gap-4 px-3 bottom-3 items-center '>
                     <img src='https://images.assetsdelivery.com/compings_v2/nexusplexus/nexusplexus2101/nexusplexus210100387.jpg' alt='' className='w-24 h-24 rounded-full' />
