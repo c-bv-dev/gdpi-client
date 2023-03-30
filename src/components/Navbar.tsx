@@ -15,6 +15,11 @@ const Navbar = () => {
             path: '/dashboard'
         },
         {
+            label: 'Tickets',
+            icon: <FiGrid className='w-5 h-5' />,
+            path: '/tickets'
+        },
+        {
             label: 'Settings',
             icon: <FiSettings className='w-5 h-5' />,
             path: '/settings'

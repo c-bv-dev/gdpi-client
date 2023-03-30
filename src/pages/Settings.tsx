@@ -2,11 +2,11 @@ interface IProps {
 
 };
 
-const Setings = (props: IProps) => {
+const Settings = (props: IProps) => {
 
     return (
-        <p>Setings</p>
+        <p>Settings</p>
     );
 };
 
-export default Setings; 
+export default Settings; 

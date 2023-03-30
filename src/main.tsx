@@ -1,5 +1,7 @@
 import { AuthProvider } from '@contexts/AuthContext';
+import { ConsumerProvider } from '@contexts/ConsumerContext';
 import { LoaderProvider } from '@contexts/LoaderContext';
+import { TicketProvider } from '@contexts/TicketContext';
 import { UserProvider } from '@contexts/UserContext';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -11,7 +13,11 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <LoaderProvider>
             <AuthProvider>
                 <UserProvider>
-                    <App />
+                    <ConsumerProvider>
+                        <TicketProvider>
+                            <App />
+                        </TicketProvider>
+                    </ConsumerProvider>
                 </UserProvider>
             </AuthProvider>
         </LoaderProvider>
