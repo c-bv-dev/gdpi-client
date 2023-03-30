@@ -11,7 +11,7 @@ export const TicketProvider = ({ children }: any) => {
     const { user } = useUser();
 
     const getTickets = async () => {
-        return await fetcher(`${process.env.VITE_API_URL}/tickets`, {
+        return await fetcher(`${process.env.VITE_API_URL}/ticket`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ export const TicketProvider = ({ children }: any) => {
     };
 
     const getTicket = async (id: string) => {
-        return await fetcher(`${process.env.VITE_API_URL}/tickets/${id}`, {
+        return await fetcher(`${process.env.VITE_API_URL}/ticket/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export const TicketProvider = ({ children }: any) => {
     };
 
     const createTicket = async (ticket: any) => {
-        return await fetcher(`${process.env.VITE_API_URL}/tickets`, {
+        return await fetcher(`${process.env.VITE_API_URL}/ticket`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export const TicketProvider = ({ children }: any) => {
     };
 
     const updateTicket = async (id: string, ticket: any) => {
-        return await fetcher(`${process.env.VITE_API_URL}/tickets/${id}`, {
+        return await fetcher(`${process.env.VITE_API_URL}/ticket/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export const TicketProvider = ({ children }: any) => {
     };
 
     const deleteTicket = async (id: string) => {
-        return await fetcher(`${process.env.VITE_API_URL}/tickets/${id}`, {
+        return await fetcher(`${process.env.VITE_API_URL}/ticket/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

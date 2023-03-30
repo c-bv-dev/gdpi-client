@@ -34,7 +34,7 @@ const Dashboard = () => {
                     </div>
                     <div className='flex flex-col gap-0.5'>
                         <p className='text-2xl'>{user?.firstName} {user?.lastName}</p>
-                        <p className='text-xs'>{user.role === 'user' ? 'Technician' : 'El administrador'}</p>
+                        <p className='text-xs'>{user.role === 'user' ? 'Technician' : 'Admin'}</p>
                     </div>
                 </div>
             </div>
