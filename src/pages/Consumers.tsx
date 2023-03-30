@@ -9,13 +9,13 @@ interface IProps {
 const Consumer = (props: IProps) => {
 
     const {
-        getConsumer,
+        getConsumers
     } = useConsumer();
 
     const [consumer, setConsumer] = useState([]);
 
-    const fetchConsumer = async () => {
-        const Consumer = await getConsumer();
+    const fetchConsumers = async () => {
+        const Consumer = await getConsumers();
         setConsumer(Consumer);
     };
 
@@ -43,7 +43,7 @@ const Consumer = (props: IProps) => {
     ];
 
     useEffect(() => {
-        fetchConsumer();
+        fetchConsumers();
     }, []);
 
     return (

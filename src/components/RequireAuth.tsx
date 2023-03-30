@@ -23,11 +23,6 @@ const RequireAuth = (props: IProps) => {
             const data = await getUser(JSON.parse(userInLocalStorage).id);
             setUser(data);
         }
-
-        if (user && (props.roles && !props.roles.includes(user.role))) {
-            console.log('You do not have permission to view this page.');
-            return navigate('/');
-        }
     };
 
     useEffect(() => {

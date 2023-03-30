@@ -8,6 +8,7 @@ interface IProps {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     className?: string;
     error?: string;
+    props?: any;
 };
 
 const Input = (props: IProps) => {
@@ -20,7 +21,8 @@ const Input = (props: IProps) => {
         placeholder,
         onChange,
         className,
-        error
+        error,
+        ...rest
     } = props;
 
     return (

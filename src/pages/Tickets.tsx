@@ -21,7 +21,7 @@ const Tickets = (props: IProps) => {
 
     const tableHeaders = [
         {
-            label: 'rfwefwID',
+            label: 'ID',
             value: 'id',
         },
         {

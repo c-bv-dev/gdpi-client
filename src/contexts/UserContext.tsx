@@ -35,15 +35,15 @@ export const UserProvider = ({ children }: any) => {
         });
     };
 
-    const updateUser = async (userData: IUser, users?: IUser[]) => {
-         await fetcher(`${process.env.VITE_API_URL}/user/${userData.id}`, {
+    const updateUser = async (userData: IUser) => {
+        return await fetcher(`${process.env.VITE_API_URL}/user/${userData.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json', 'Authorization': `Bearer ${user?.token}`
             },
             body: JSON.stringify(userData)
         });
-        return users?.map((user) => user.id === userData.id ? userData : user);
+
     };
 
     const deleteUser = async (id: string, users: IUser[]) => {

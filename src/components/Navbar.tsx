@@ -2,7 +2,7 @@ import AtelierLogo from '@assets/icons/AtelierLogo';
 import useAuth from '@hooks/useAuth';
 import useUser from '@hooks/useUser';
 import { FiBookmark, FiBriefcase, FiLayout, FiLogOut, FiSettings, FiUser, FiUsers } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     const { user } = useUser();
@@ -47,13 +47,15 @@ const Navbar = () => {
                 </Link>
                 <div className='flex flex-col gap-2'>
                     {links.map((link) => (
-                        <Link
+                        <NavLink
                             key={link.label}
                             to={link.path}
-                            className='flex p-1 px-1 rounded items-center gap-2'
+                            className={({ isActive, isPending }) =>
+                                isActive ? 'bg-gray-800 flex p-2 rounded items-center gap-2' : 'flex p-2 rounded items-center gap-2'
+                            }
                         >
                             {link.icon}{link.label}
-                        </Link>
+                        </NavLink>
                     ))}
                 </div>
             </div>
